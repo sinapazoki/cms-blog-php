@@ -7,7 +7,6 @@
 	include_once("{$currDir}/header.php");
 
 	$adminConfig = config('adminConfig');
-
 	if(!$cg = sqlValue("select count(1) from membership_groups where allowSignup=1")){
 		$noSignup = true;
 		echo error_message($Translation['sign up disabled']);
@@ -21,10 +20,8 @@
 		$password = $_POST['password'];
 		$confirmPassword = $_POST['confirmPassword'];
 		$groupID = intval($_POST['groupID']);
-		$custom1 = makeSafe($_POST['custom1']);
-		$custom2 = makeSafe($_POST['custom2']);
-		$custom3 = makeSafe($_POST['custom3']);
-		$custom4 = makeSafe($_POST['custom4']);
+		$custom1 = makeSafe($_POST['full_name']);
+		$custom2 = makeSafe($_POST['about']);
 
 		// validate data
 		if(!$memberID){
@@ -50,7 +47,7 @@
 
 		// save member data
 		$needsApproval = sqlValue("select needsApproval from membership_groups where groupID='$groupID'");
-		sql("INSERT INTO `membership_users` set memberID='$memberID', passMD5='".md5($password)."', email='$email', signupDate='".@date('Y-m-d')."', groupID='$groupID', isBanned='0', isApproved='".($needsApproval==1 ? '0' : '1')."', custom1='$custom1', custom2='$custom2', custom3='$custom3', custom4='$custom4', comments='member signed up through the registration form.'", $eo);
+		sql("INSERT INTO `membership_users` set memberID='$memberID', passMD5='".md5($password)."', email='$email', signupDate='".@date('Y-m-d')."', groupID='$groupID', isBanned='0', isApproved='".($needsApproval==1 ? '0' : '1')."', full_name='$custom1', about='$custom2', comments=''", $eo);
 
 		// admin mail notification
 		/* ---- application name as provided in AppGini is used here ---- */
@@ -61,10 +58,7 @@
 			"Member email: {$email}\n" .
 			"IP address: {$_SERVER['REMOTE_ADDR']}\n" .
 			"Custom fields:\n" .
-			($adminConfig['custom1'] ? "{$adminConfig['custom1']}: {$custom1}\n" : '') .
-			($adminConfig['custom2'] ? "{$adminConfig['custom2']}: {$custom2}\n" : '') .
-			($adminConfig['custom3'] ? "{$adminConfig['custom3']}: {$custom3}\n" : '') .
-			($adminConfig['custom4'] ? "{$adminConfig['custom4']}: {$custom4}\n" : '')
+			($adminConfig['custom1'] ? "{$adminConfig['custom1']}: {$custom1}\n" : '') 
 		);
 
 		if($adminConfig['notifyAdminNewMembers'] == 2 && !$needsApproval){
@@ -100,7 +94,7 @@
 ?>
 
 <?php if(!$noSignup){ ?>
-	<div class="row d-flex justify-content-center align-items-center">
+	<div dir="rtl" class="row d-flex justify-content-center align-items-center text-right">
 
 		<div class="col-sm-8 col-md-6 col-lg-4">
 			<div class="panel panel-success">
@@ -118,6 +112,13 @@
 							<span id="usernameNotAvailable" class="help-block hidden pull-left"><i class="glyphicon glyphicon-remove"></i> <?php echo str_ireplace(array("'", '"', '<memberid>'), '', $Translation['username invalid']); ?></span>
 							<div class="clearfix"></div>
 						</div>
+
+						
+						<div class="form-group">
+							<label for="full_name" class="control-label"><?php echo $adminConfig['full_name']; ?></label>
+							<input class="form-control" type="text" required="" placeholder="<?php echo $adminConfig['full_name']; ?>" id="full_name" name="full_name">
+						</div>
+
 
 						<div class="row">
 							<div class="col-sm-6">
@@ -142,23 +143,15 @@
 						<div class="form-group">
 							<label for="group" class="control-label"><?php echo $Translation['group']; ?></label>
 							<?php echo $groupsDropDown; ?>
-							<span class="help-block"><?php echo $Translation['groups *']; ?></span>
 						</div>
 
-						<?php
-							if(!$adminConfig['hide_custom_user_fields_during_signup']){
-								for($cf = 1; $cf <= 4; $cf++){
-									if($adminConfig['custom'.$cf] != ''){
-										?>
-										<div class="row form-group">
-										   <div class="col-sm-3"><label class="control-label" for="custom<?php echo $cf; ?>"><?php echo $adminConfig['custom'.$cf]; ?></label></div>
-										   <div class="col-sm-9"><input class="form-control" type="text" placeholder="<?php echo $adminConfig['custom'.$cf]; ?>" id="custom<?php echo $cf; ?>" name="custom<?php echo $cf; ?>"></div>
-										</div>
-										<?php
-									}
-								}
-							}
-						?>
+
+
+						<div class="form-group">
+							<label for="about" class="control-label"><?php echo $adminConfig['about']; ?></label>
+							<textarea rows="4" class="form-control" type="textarea" required="" placeholder="<?php echo $adminConfig['about']; ?>" id="about" name="about"></textarea>
+						</div>
+
 
 						<div class="row">
 							<div class="col-sm-offset-3 col-sm-6">

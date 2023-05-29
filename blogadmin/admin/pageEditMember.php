@@ -32,14 +32,12 @@ if(isset($_POST['saveChanges'])){
 	// validate data
 	$oldMemberID = makeSafe(strtolower($_POST['oldMemberID']));
 	$password = makeSafe($_POST['password']);
+	$full_name = makeSafe($_POST['full_name']);
+	$about = makeSafe($_POST['about']);
 	$email = isEmail($_POST['email']);
 	$groupID = intval($_POST['groupID']);
 	$isApproved = ($_POST['isApproved'] == 1 ? 1 : 0);
 	$isBanned = ($_POST['isBanned'] == 1 ? 1 : 0);
-	$customs = array();
-	for($cust = 1; $cust <= 4; $cust++){
-		$customs[$cust] = makeSafe($_POST["custom{$cust}"]);
-	}
 	$comments = makeSafe($_POST['comments']);
 
 	###############################
@@ -57,11 +55,8 @@ if(isset($_POST['saveChanges'])){
 		}
 
 		// add member
-		$customs_sql = '';
-		foreach($customs as $i => $cust_value){
-			$customs_sql .= "custom{$i}='{$cust_value}', ";
-		}
-		sql("INSERT INTO `membership_users` set memberID='{$memberID}', passMD5='" . md5($password) . "', email='{$email}', signupDate='" . @date('Y-m-d') . "', groupID='{$groupID}', isBanned='{$isBanned}', isApproved='{$isApproved}', {$customs_sql} comments='{$comments}'", $eo);
+
+		sql("INSERT INTO `membership_users` set memberID='{$memberID}', passMD5='" . md5($password) . "', email='{$email}', about='{$about}', signupDate='" . @date('Y-m-d') . "', groupID='{$groupID}', isBanned='{$isBanned}', isApproved='{$isApproved}', full_name='{$full_name}' , comments=''", $eo);
 
 		if($isApproved){
 			notifyMemberApproval($memberID);
@@ -97,19 +92,15 @@ if(isset($_POST['saveChanges'])){
 		$oldGroupID = sqlValue("select groupID from membership_users where lcase(memberID)='{$oldMemberID}'");
 
 		// update member info
-		$customs_sql = '';
-		$non_superadmin_sql = "passMD5=" . ($password != '' ? "'" . md5($password) . "'" : "passMD5") . ", email='{$email}', groupID='{$groupID}', isBanned='{$isBanned}', isApproved='{$isApproved}', ";
-		foreach($customs as $i => $cust_value){
-			$customs_sql .= "custom{$i}='{$cust_value}', ";
-		}      
+		$non_superadmin_sql = "passMD5=" . ($password != '' ? "'" . md5($password) . "'" : "passMD5") . ", email='{$email}', full_name='{$full_name}', about='{$about}', groupID='{$groupID}', isBanned='{$isBanned}', isApproved='{$isApproved}', ";
 
 		if($superadmin){
 			$admin_pass_md5 = makeSafe($adminConfig['adminPassword'], false);
 			$admin_email = makeSafe($adminConfig['senderEmail'], false);
-			$non_superadmin_sql = "passMD5='{$admin_pass_md5}', email='{$admin_email}', isBanned='0', isApproved='1', ";
+			$non_superadmin_sql = "passMD5='{$admin_pass_md5}', email='{$admin_email}', full_name='{$full_name}', about='{$about}', isBanned='0', isApproved='1', ";
 		}
 
-		$upQry = "UPDATE `membership_users` set memberID='{$memberID}', {$non_superadmin_sql} {$customs_sql} comments='{$comments}' WHERE lcase(memberID)='{$oldMemberID}'";
+		$upQry = "UPDATE `membership_users` set memberID='{$memberID}', {$non_superadmin_sql} comments='{$comments}' WHERE lcase(memberID)='{$oldMemberID}'";
 		sql($upQry, $eo);
 
 		// if memberID was changed, update membership_userrecords
@@ -158,6 +149,8 @@ if($memberID != ''){
 
 	// get member data
 	$email = $row['email'];
+	$full_name = $row['full_name'];
+	$about = $row['about'];
 	$groupID = $row['groupID'];
 	$isApproved = $row['isApproved'];
 	$isBanned = $row['isBanned'];
@@ -206,13 +199,19 @@ if($memberID != '' && $groupID != sqlValue("select groupID from membership_group
 	<?php echo csrf_token(); ?>
 	<input type="hidden" name="oldMemberID" value="<?php echo ($memberID ? html_attr($memberID) : ""); ?>">
 
-	<?php if(!$superadmin){ /* non-admin user fields */ ?>
 		<div class="form-group ">
 			<label for="memberID" class="col-sm-4 col-md-3 col-lg-2 col-lg-offset-2 control-label"><?php echo $Translation["member username"]; ?></label>
 			<div class="col-sm-8 col-md-9 col-lg-6">
 				<input type="text" class="form-control" name="memberID" id="memberID" value="<?php echo html_attr($memberID); ?>" autofocus>
 				<span id="username-available" class="help-block hidden"><i class="glyphicon glyphicon-ok"></i> <?php echo str_ireplace(array("'", '"', '<memberid>'), '', $Translation['user available']); ?></span>
 				<span id="username-not-available" class="help-block hidden"><i class="glyphicon glyphicon-remove"></i> <?php echo str_ireplace(array("'", '"', '<memberid>'), '', $Translation['username invalid']); ?></span>
+			</div>
+		</div>
+
+		<div class="form-group ">
+			<label for="memberID" class="col-sm-4 col-md-3 col-lg-2 col-lg-offset-2 control-label">نام و نام خانوادگی</label>
+			<div class="col-sm-8 col-md-9 col-lg-6">
+			<input class="form-control" type="text" id="full_name" name="full_name" value="<?php echo $full_name; ?>">
 			</div>
 		</div>
 
@@ -244,8 +243,14 @@ if($memberID != '' && $groupID != sqlValue("select groupID from membership_group
 				<?php
 					$safe_anonGroup = makeSafe($anonGroup, false);
 					echo bootstrapSQLSelect('groupID', "select groupID, name from membership_groups where name!='{$safe_anonGroup}' order by name", $groupID);
-					echo $userPermissionsNote;
 				?>
+			</div>
+		</div>
+
+		<div class="form-group ">
+			<label for="memberID" class="col-sm-4 col-md-3 col-lg-2 col-lg-offset-2 control-label">درباره من</label>
+			<div class="col-sm-8 col-md-9 col-lg-6">
+			<textarea rows="4" class="form-control" type="text" id="about" name="about" ><?php echo $about; ?></textarea>
 			</div>
 		</div>
 
@@ -261,6 +266,8 @@ if($memberID != '' && $groupID != sqlValue("select groupID from membership_group
 			</div>
 		</div>
 
+
+
 		<div class="form-group">
 			<label class="col-sm-4 col-md-3 col-lg-2 col-lg-offset-2 control-label"></label>
 			<div class="col-sm-8 col-md-9 col-lg-6">
@@ -272,25 +279,8 @@ if($memberID != '' && $groupID != sqlValue("select groupID from membership_group
 				</div>
 			</div>
 		</div>
-	<?php } /* end of non-admin user fields */ ?>
 
-	<?php for($cust = 1; $cust <= 4; $cust++){ ?>
-		<?php if($adminConfig["custom{$cust}"] != ''){ ?>
-			<div class="form-group">
-				<label for="custom<?php echo $cust; ?>" class="col-sm-4 col-md-3 col-lg-2 col-lg-offset-2 control-label"><?php echo $adminConfig["custom{$cust}"]; ?></label>
-				<div class="col-sm-8 col-md-9 col-lg-6">
-					<input class="form-control" type="text" name="custom<?php echo $cust; ?>" id="custom<?php echo $cust; ?>" value="<?php echo $customs[$cust]; ?>" >
-				</div>
-			</div>
-		<?php } ?>
-	<?php } ?>
 
-	<div class="form-group">
-		<label for="comments" class="col-sm-4 col-md-3 col-lg-2 col-lg-offset-2 control-label"><?php echo $Translation["comments"]; ?> </label>
-		<div class="col-sm-8 col-md-9 col-lg-6">
-			<textarea id="comments" name="comments" rows="10" class="form-control"><?php echo $comments; ?></textarea>
-		</div>
-	</div>
 
 	<div class="form-group">
 		<label class="col-sm-4 col-md-3 col-lg-2 col-lg-offset-2 control-label"></label>

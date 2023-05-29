@@ -33,7 +33,7 @@
 	}
 
 	function isEmail($email){
-		if(preg_match('/^([*+!.&#$�\'\\%\/0-9a-z^_`{}=?~:-]+)@(([0-9a-z-]+\.)+[0-9a-z]{2,45})$/i', $email)){
+		if(preg_match('/^([*+!.&#$�\'\\%\/0-9a-z^_`{}=?~:-]+)@(([0-9a-z-]+\.)+[0-9a-z]{2,45})$/i', $email)){
 			return $email;
 		}else{
 			return FALSE;
@@ -156,10 +156,8 @@
 				'groupsPerPage' => 10,
 				'membersPerPage' => 10,
 				'recordsPerPage' => 10,
-				'custom1' => 'Full Name',
-				'custom2' => 'Address',
-				'custom3' => 'City',
-				'custom4' => 'State',
+				'full_name' => "نام و نام خانوادگی",
+				'about' => "درباره من",
 				'MySQLDateFormat' => '%m/%d/%Y',
 				'PHPDateFormat' => 'n/j/Y',
 				'PHPDateTimeFormat' => 'm/d/Y, h:i a',

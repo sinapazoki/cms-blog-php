@@ -21,10 +21,8 @@
 
 		/* process inputs */
 		$email=isEmail($_POST['email']);
-		$custom1=makeSafe($_POST['custom1']);
-		$custom2=makeSafe($_POST['custom2']);
-		$custom3=makeSafe($_POST['custom3']);
-		$custom4=makeSafe($_POST['custom4']);
+		$custom1=makeSafe($_POST['full_name']);
+		$custom2=makeSafe($_POST['about']);
 
 		/* validate email */
 		if(!$email){
@@ -35,7 +33,7 @@
 
 		/* update profile */
 		$updateDT = date($adminConfig['PHPDateTimeFormat']);
-		sql("UPDATE `membership_users` set email='$email', custom1='$custom1', custom2='$custom2', custom3='$custom3', custom4='$custom4', comments=CONCAT_WS('\\n', comments, 'member updated his profile on $updateDT from IP address {$mi[IP]}') WHERE memberID='{$mi['username']}'", $eo);
+		sql("UPDATE `membership_users` set email='$email', full_name='$custom1', about='$custom2', custom3='$custom3', custom4='$custom4', comments=CONCAT_WS('\\n', comments, 'member updated his profile on $updateDT from IP address {$mi[IP]}') WHERE memberID='{$mi['username']}'", $eo);
 
 		// hook: member_activity
 		if(function_exists('member_activity')){

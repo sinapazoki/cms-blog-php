@@ -129,14 +129,15 @@ $user = mysqli_fetch_assoc($result2);
 										<blockquote class="blockquote blockquote-custom bg-white py-5 shadow rounded">
 											<div class="blockquote-custom-icon bg-info shadow-sm"><i class="fa fa-quote-left text-white"></i></div>
 											<p class="mb-0 mt-2 font-italic text-right">
-											<?php echo $user['comments']; ?>
+											<?php echo $user['about']; ?>
 											</p>
-											<div class="blockquote-footer pt-4 mt-4 border-top"><?php echo $user['memberID']; ?>
+											<div class="blockquote-footer pt-4 mt-4 border-top"><?php echo $user['full_name']; ?>
 												<cite title="Source Title"><?php echo $user['email']; ?></cite>
 										</div>
 										</blockquote>
 									</div>
 								</div>
+			
 
 								<!--//left-->
 								<!--right-->
