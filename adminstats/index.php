@@ -13,30 +13,7 @@
 <body>
 	<div class="container">
 		<div class="row">
-			<!--unique visitors count-->
-			<div class="alert alert-success">
-				<strong><?php 
-				require_once('conn.php');
-				$sql = "SELECT COUNT(DISTINCT ip_address) AS alias FROM visitor_info";
-				$query = $db->prepare($sql);
-				$query->execute();
-				$unique_visitors = $query->fetch()['alias'];
-				echo "TOTAL NUMBER OF UNIQUE VISITORS:".$unique_visitors;
 
-				?></strong>
-			</div>
-			<!--get most viewed page-->
-			<div class="alert alert-info">
-				<strong><?php 
-				require_once('conn.php');
-				$sql = "SELECT MAX(count) AS maximum FROM page_hits";
-				$query = $db->prepare($sql);
-				$query->execute();
-				$maxcount = $query->fetch()['maximum'];
-				echo "HIGHEST PAGE VIEWS :".$maxcount;
-
-				?></strong>
-			</div><br>
 			<div class="panel panel-primary">
 				<div class="panel-heading text-center">LATEST PAGE VIEWS&nbsp;&nbsp;(TOTAL PAGES VIEWED:<?php require_once("count_pages.php"); ?>)</div>
 				<div class="panel-body">
@@ -57,24 +34,6 @@
 								echo 'Not Connected '.$ex->getMessage();
 							}
 
-//mysql select query
-							$stmt=$con->prepare('SELECT * FROM page_hits LIMIT 30');
-							$stmt->execute();
-							$resources=$stmt->fetchAll();
-							$row_count=$stmt->rowCount();
-							if ($row_count==0) {
-		# code...
-								$jibu="No content Yet";
-							}
-							foreach ($resources as $resource) {
-								echo '
-								<tr>
-								<td>'.$resource['page'].'</td>
-								<td>'.$resource['count'].'</td>
-								</tr>';
-
-
-							}
 							?>
 						</table>
 					</div> 
@@ -103,25 +62,7 @@
 								echo 'Not Connected '.$ex->getMessage();
 							}
 
-//mysql select query
-							$stmt=$con->prepare('SELECT * FROM visitor_info ORDER BY time_accessed DESC LIMIT 10');
-							$stmt->execute();
-							$resources=$stmt->fetchAll();
-							$row_count=$stmt->rowCount();
-							if ($row_count==0) {
-		# code...
-								$jibu="No content Yet";
-							}
-							foreach ($resources as $resource) {
-								echo '
-								<tr>
-								<td>'.$resource['ip_address'].'</td>
-								<td>'.$resource['user_agent'].'</td>
-								<td>'.$resource['time_accessed'].'</td>
-								</tr>';
 
-
-							}
 							?>
 						</table>
 					</div> 

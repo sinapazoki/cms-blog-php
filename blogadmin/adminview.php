@@ -88,7 +88,6 @@
                     <i class="fa fa-bar-chart-o fa-5x"></i>
                   </div>
                   <div class="col-xs-6 text-right">
-                    <p class="announcement-heading"><?php adminstats("visitor_info","page_hits");?></p>
                     <p class="announcement-text"><strong>Admin Stats</strong></p>
                   </div>
                 </div>
