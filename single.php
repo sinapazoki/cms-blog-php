@@ -4,6 +4,7 @@
 include("database/conn.php");//database config file
 $id=$_REQUEST['id']; $query="SELECT * from blogs where id='".$id."'"; $result=mysqli_query($GLOBALS["___mysqli_ston"],$query) or die ( ((is_object($GLOBALS["___mysqli_ston"]))? mysqli_error($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_error()) ?$___mysqli_res : true))); 
 $row = mysqli_fetch_assoc($result);
+$con=mysqli_connect("localhost","root","","blog_admin_db");
 
 //query to get user details
 $query2="SELECT * from membership_users where memberID='".$row['author']."'"; $result2=mysqli_query($GLOBALS["___mysqli_ston"],$query2) or die ( ((is_object($GLOBALS["___mysqli_ston"]))? mysqli_error($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_error()) ?$___mysqli_res : true)));
@@ -136,7 +137,65 @@ $user = mysqli_fetch_assoc($result2);
 										</div>
 										</blockquote>
 									</div>
+    <h2 style="margin: 0px;">ارسال نظر</h2>
+    <hr style="width: 200px;">
+    <div class="form">
+        <form method="post">
+            <input type="text" name="name" placeholder="نامـ"><br>
+            <input type="email" name="email" placeholder="ایمیلـ"><br>
+            <textarea name="text" placeholder="نظر"></textarea><br>
+            <input type="submit" name="submit" value="ارسال"><br>
+        </form>
+        <?php
+            if(isset($_POST['submit'])){
+                $name  = $_POST['name'];
+                $email = $_POST['email'];
+                $text  = $_POST['text'];
+                    if(empty($name)){
+                        echo "نام خود را وارد کنید";
+                    }elseif(empty($email)){
+                        echo "ایمیل خود را وارد کنید";
+                    }elseif(empty($text)){
+                        echo "نظر خود را وارد کنید";
+                    }elseif(!preg_match("/([\w\-]+\@[\w\-]+\.[\w\-]+)/",$email)){
+                        echo "ایمیل صحیح نیست";
+                    }else{
+                        $insert = "INSERT INTO opinions (name , email , opinion)
+                        VALUES (N'$name' , N'$email' , N'$text')";
+
+                            $insert_s = mysqli_query($con,$insert);
+                                if($insert_s){
+                                    echo "نظر شما با موفقیت ثبت شد";
+                                }else{
+                                    echo "به مشکل برخوردیم...";
+                                }
+                    }
+            }
+        ?>
+    </div>
+    <h2>نظرات</h2><hr>
+    <div class="opinions">
+        <?php
+            $select="SELECT * FROM `opinions`";
+                $run=mysqli_query($con,"SET NAME utf8");
+                $run=mysqli_query($con,"SET CHARACTER SET utf8");
+                $run=mysqli_query($con,$select);
+                    while($row=mysqli_fetch_array($run)){
+                        $S_name    = $row['name'];
+                        $S_opinion = $row['opinion'];
+        ?>
+            <div class="opinion">
+                <h3><?php echo $S_name; ?> : </h3><hr>
+                <textarea><?php echo $S_opinion; ?></textarea>
+            </div>
+        <?php
+                    }
+        ?>
+    </div>
 								</div>
+
+
+								
 			
 
 								<!--//left-->
