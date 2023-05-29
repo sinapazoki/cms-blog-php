@@ -4,15 +4,6 @@
 	$GLOBALS['page_title'] = $Translation['groups'];
 	include("{$currDir}/incHeader.php");
 
-	if($_GET['searchGroups'] != ""){
-		$searchSQL = makeSafe($_GET['searchGroups']);
-		$searchHTML = html_attr($_GET['searchGroups']);
-		$where = "where name like '%{$searchSQL}%' or description like '%{$searchSQL}%'";
-	}else{
-		$searchSQL = '';
-		$searchHTML = '';
-		$where = "";
-	}
 
 	$numGroups = sqlValue("select count(1) from membership_groups $where");
 	if(!$numGroups && $searchSQL != ''){
@@ -43,22 +34,6 @@
 
 <table class="table table-striped table-bordered table-hover">
 	<thead>
-		<tr>
-			<th colspan="4" class="text-center">
-				<form class="form-inline" method="get" action="pageViewGroups.php">
-					<input type="hidden" name="page" value="1">
-
-					<div class="form-group">
-						<label for="searchGroups"><?php echo $Translation['search groups'] ; ?></label>
-						<input class="form-control" type="text" id="searchGroups" name="searchGroups" value="<?php echo $searchHTML; ?>" size="20">
-					</div>
-					<div class="form-group">
-						<button type="submit" class="btn btn-primary"><i class="glyphicon glyphicon-search"></i> <?php echo $Translation['find']; ?></button>
-						<button type="button" class="btn btn-warning" onClick="window.location='pageViewGroups.php';"><i class="glyphicon glyphicon-remove"></i> <?php echo $Translation['reset']; ?></button>
-					</div>
-				</form>
-			</th>
-		</tr>
 		<tr>
 			<th><?php echo $Translation["group"]  ; ?></th>
 			<th><?php echo $Translation["description"] ; ?></th>
@@ -103,42 +78,6 @@
 			}
 		?>
 	</tbody>
-	<tfoot>
-		<tr>
-			<td colspan="4">
-				<table width="100%" cellspacing="0">
-					<tr>
-						<th class="text-left" width="33%">
-							<a class="btn btn-default" href="pageViewGroups.php?searchGroups=<?php echo $searchHTML; ?>&page=<?php echo ($page > 1 ? $page - 1 : 1); ?>"><?php echo $Translation['previous']; ?></a>
-						</th>
-						<th class="text-center" width="33%">
-							<?php 
-								$originalValues =  array ('<GROUPNUM1>','<GROUPNUM2>','<GROUPS>' );
-								$replaceValues = array ( $start+1 , $start+db_num_rows($res) , $numGroups );
-								echo str_replace ( $originalValues , $replaceValues , $Translation['displaying groups'] );
-							?>
-						</th>
-						<th class="text-right">
-							<a class="btn btn-default" href="pageViewGroups.php?searchGroups=<?php echo $searchHTML; ?>&page=<?php echo ($page < ceil($numGroups / $adminConfig['groupsPerPage']) ? $page + 1 : ceil($numGroups / $adminConfig['groupsPerPage'])); ?>"><?php echo $Translation['next'] ; ?></a>
-						</th>
-					</tr>
-				</table>
-			</td>
-		</tr>
-		<tr>
-			<th colspan="4">
-				<b><?php echo $Translation['key'] ; ?></b>
-				<div class="row">
-					<div class="col-sm-6 col-md-4 col-lg-3"><i class="glyphicon glyphicon-pencil text-info"></i> <?php echo $Translation['edit group details'] ; ?></div>
-					<div class="col-sm-6 col-md-4 col-lg-3"><i class="glyphicon glyphicon-trash text-danger"></i> <?php echo $Translation['delete group'] ; ?></div>
-					<div class="col-sm-6 col-md-4 col-lg-3"><i class="glyphicon glyphicon-plus text-success"></i> <?php echo $Translation['add member to group'] ; ?></div>
-					<div class="col-sm-6 col-md-4 col-lg-3"><i class="glyphicon glyphicon-th text-info"></i> <?php echo $Translation['view data records'] ; ?></div>
-					<div class="col-sm-6 col-md-4 col-lg-3"><i class="glyphicon glyphicon-user text-info"></i> <?php echo $Translation['list group members'] ; ?></div>
-					<div class="col-sm-6 col-md-4 col-lg-3"><i class="glyphicon glyphicon-envelope text-info"></i> <?php echo $Translation['send email to all members'] ; ?></div>
-				</div>
-			</th>
-		</tr>
-	</tfoot>
 </table>
 
 <style>

@@ -12,61 +12,62 @@
 	// =====================================================
 
 	// incHeader.php
-	$Translation['membership management'] = "Membership Management";
-	$Translation['password mismatch'] = "Password doesn\'t match.";
-	$Translation['error'] = "Error";
-	$Translation['invalid email'] = "Invalid Email Address";
-	$Translation['sending mails'] = "Sending mails might take some time. Please don't close this page until you see the 'Done' message.";
-	$Translation['complete step 4'] = "Please complete step 4 by selecting the member you want to transfer records to.";
-	$Translation['info'] = "Info";
-	$Translation['sure move member'] = 'Are you sure you want to move member \'<MEMBER>\' and his data from group \'<OLDGROUP>\' to group \'<NEWGROUP>\'?';
-	$Translation['sure move data of member'] = 'Are you sure you want to move data of member \'<OLDMEMBER>\' from group \'<OLDGROUP>\' to member \'<NEWMEMBER>\' from group \'<NEWGROUP>\'?';
-	$Translation['sure move all members'] = 'Are you sure you want to move all members and data from group \'<OLDGROUP>\' to group \'<NEWGROUP>\'?';
-	$Translation['sure move data of all members'] = 'Are you sure you want to move data of all members of group \'<OLDGROUP>\' to member \'<MEMBER>\' from group \'<NEWGROUP>\'?';
-	$Translation['toggle navigation'] = "Toggle navigation";
-	$Translation['admin area'] = "Admin Area";
-	$Translation['groups'] = "Groups";
-	$Translation['view groups'] = "View Groups";
-	$Translation['add group'] = "Add Group";
-	$Translation['edit anonymous permissions'] = "Edit Anonymous Permissions";
-	$Translation['members'] = "Members";
-	$Translation['view members'] = "View Members";
-	$Translation['add member'] = "Add Member";
-	$Translation["view members' records"] = "View Members' Records";  
-	$Translation["utilities"] = "Utilities"; 
-	$Translation["admin settings"] = "Admin Settings"; 
-	$Translation["rebuild thumbnails"] = "Rebuild Thumbnails"; 
-	$Translation['rebuild fields'] = "Rebuild fields";
-	$Translation['import CSV'] = "Import CSV data";
-	$Translation['batch transfer'] = "Batch Transfer Wizard";
-	$Translation['mail all users'] = "Mail All Users";
-	$Translation['AppGini forum'] = "AppGini Community Forum";
-	$Translation["user's area"] = 'User\'s area';
-	$Translation["sign out"] = "Sign out";
-	$Translation["attention"] = "Attention!";
-	$Translation['security risk admin'] = 'You are using the default admin username and password. This is a huge security risk. Please change at least the admin password from the <a href="pageSettings.php">Admin Settings</a> page <em>immediately</em>.';
-	$Translation['security risk'] = 'You are using the default admin password. This is a huge security	risk. Please change the admin password from the <a href="pageSettings.php">Admin Settings</a> page <em>immediately</em>.' ;
-	$Translation['plugins'] = 'Plugins';
+	$Translation['membership management'] = "مدیریت عضویت";
+	$Translation['password mismatch'] = "رمز عبور همخوانی ندارد.";
+	$Translation['error'] = "خطا";
+	$Translation['invalid email'] = "آدرس ایمیل نامعتبر است";
+	$Translation['sending mails'] = "ارسال ایمیل‌ها ممکن است کمی زمان ببرد. لطفاً تا دیدن پیام 'انجام شد' از بستن این صفحه خودداری کنید.";
+	$Translation['complete step 4'] = "لطفاً مرحله ۴ را با انتخاب عضوی که می خواهید رکوردها را به او منتقل کنید کامل کنید.";
+	$Translation['info'] = "اطلاعات";
+	$Translation['sure move member'] = 'آیا از انتقال عضو \'<MEMBER>\' و داده‌های او از گروه \'<OLDGROUP>\' به گروه \'<NEWGROUP>\' مطمئن هستید؟';
+	$Translation['sure move data of member'] = 'آیا از انتقال داده عضو \'<OLDMEMBER>\' از گروه \'<OLDGROUP>\' به عضو \'<NEWMEMBER>\' از گروه \'<NEWGROUP>\' مطمئن هستید؟';
+	$Translation['sure move all members'] = 'آیا از انتقال همه اعضا و داده‌ها از گروه \'<OLDGROUP>\' به گروه \'<NEWGROUP>\' مطمئن هستید؟';
+	$Translation['sure move data of all members'] = 'آیا از انتقال داده‌های تمامی اعضای گروه \'<OLDGROUP>\' به عضو \'<MEMBER>\' از گروه \'<NEWGROUP>\' مطمئن هستید؟';
+	$Translation['toggle navigation'] = "تغییر ناوبری";
+	$Translation['admin area'] = "پیشخوان مدیر";
+	$Translation['groups'] = "گروه‌ها";
+	$Translation['view groups'] = "مشاهده گروه‌ها";
+	$Translation['add group'] = "افزودن گروه";
+	$Translation['edit anonymous permissions'] = "ویرایش مجوزهای بی‌نام";
+	$Translation['members'] = "اعضا";
+	$Translation['view members'] = "مشاهده اعضا";
+	$Translation['add member'] = "افزودن عضو";
+	$Translation["view members' records"] = "مشاهده رکوردهای اعضا";
+	$Translation["utilities"] = "ابزارها";
+	$Translation["admin settings"] = "تنظیمات مدیر";
+	$Translation["rebuild thumbnails"] = "بازسازی تصاویر کوچک";
+	$Translation['rebuild fields'] = "بازسازی فیلدها";
+	$Translation['import CSV'] = "ورود داده CSV";
+	$Translation['batch transfer'] = "ویزارد انتقال دسته‌ای";
+	$Translation['mail all users'] = "ارسال ایمیل به همه کاربران";
+	$Translation['AppGini forum'] = "انجمن جامعه AppGini";
+	$Translation["user's area"] = 'ناحیه کاربری';
+	$Translation["sign out"] = "خروج";
+	$Translation["attention"] = "توجه!";
+	$Translation['security risk admin'] = 'شما از نام کاربری و رمز عبور پیش‌فرض مدیر استفاده می‌کنید. این یک خطر امنیتی بزرگ است. لطفاً حداقل رمز عبور مدیر را از صفحه <a href="pageSettings.php">تنظیمات مدیر</a> <em>بلافاصله</em> تغییر دهید.';
+	$Translation['security risk'] = 'شما از رمز عبور پیش‌فرض مدیر استفاده می‌کنید. این یک خطر امنیتی بزرگ است. لطفاً رمز عبور مدیر را از صفحه <a href="pageSettings.php">تنظیمات مدیر</a> <em>بلافاصله</em> تغییر دهید.';
+	$Translation['plugins'] = 'افزونه‌ها';
+	
 
 	//pageAssignOwners.php
-	$Translation["assigned table records to group"] = "Assigned <NUMBER> records of table '<TABLE>' to group '<GROUP>'";
-	$Translation["assigned table records to group and member"] = "Assigned <NUMBER> records of table '<TABLE>' to group '<GROUP>' , member '<MEMBERID>'";
-	$Translation['data ownership assign'] = "Assign ownership to data that has no owners";
-	$Translation['records ownership done'] = "All records in all tables have owners now.<br>Back to <a href='pageHome.php'>Admin homepage</a>.";
-	$Translation['select group'] = "Select group";
-	$Translation['data ownership'] = "Sometimes, you might have tables with data that were entered before implementing this AppGini membership management system, or entered using other applications unaware of AppGini ownership system. This data currently has no owners. This page allows you to assign owner groups and owner members to this data.";
-	$Translation["table"] = "Table";
-	$Translation["records with no owners"] = "Records with no owners";
-	$Translation["new owner group"] = "New owner group";
-	$Translation["new owner member"] = "New owner member*";	
-	$Translation["cancel"] = "Cancel";
-	$Translation["assign new owners"] = "Assign new owners";
-	$Translation["please wait"] = "Please wait ...";	
-	$Translation["if no owner member assigned"] = '* If you assign no owner member here, you can still use the <a href="pageTransferOwnership.php">Batch Transfer Wizard</a> later to do so.';
+	$Translation["assigned table records to group"] = "تعداد <NUMBER> رکورد جدول '<TABLE>' به گروه '<GROUP>' اختصاص داده شد";
+	$Translation["assigned table records to group and member"] = "تعداد <NUMBER> رکورد جدول '<TABLE>' به گروه '<GROUP>' و عضو '<MEMBERID>' اختصاص داده شد";
+	$Translation['data ownership assign'] = "اختصاص مالکیت به داده‌هایی که مالک ندارند";
+	$Translation['records ownership done'] = "هم اکنون تمامی رکوردها در تمامی جداول مالک دارند.<br>بازگشت به <a href='pageHome.php'>صفحه اصلی مدیریت</a>.";
+	$Translation['select group'] = "انتخاب گروه";
+	$Translation['data ownership'] = "گاهی اوقات ممکن است جداولی داشته باشید که داده‌های آن‌ها قبل از پیاده‌سازی سیستم مدیریت عضویت AppGini وارد شده است یا با استفاده از برنامه‌های دیگری که از سیستم مالکیت AppGini آگاه نیستند وارد شده است. این داده‌ها در حال حاضر مالک ندارند. این صفحه به شما امکان می‌دهد گروه‌های مالک و اعضای مالک را به این داده‌ها اختصاص دهید.";
+	$Translation["table"] = "جدول";
+	$Translation["records with no owners"] = "رکوردهای بدون مالک";
+	$Translation["new owner group"] = "گروه مالک جدید";
+	$Translation["new owner member"] = "عضو مالک جدید*";	
+	$Translation["cancel"] = "لغو";
+	$Translation["assign new owners"] = "اختصاص مالکان جدید";
+	$Translation["please wait"] = "لطفاً منتظر بمانید...";
+	$Translation["if no owner member assigned"] = '* در صورتی که هیچ عضو مالکی انتخاب نکنید، همچنان می‌توانید از <a href="pageTransferOwnership.php">ویزارد انتقال دسته‌ای</a> برای انجام این کار استفاده کنید.';
 	
 	//pageDeleteGroup.php
-	$Translation["can not delete group remove members"] = 'Can\'t delete this group. Please remove members first.';
-	$Translation["can not delete group transfer records"] = 'Can\'t delete this group. Please transfer its data records to another group first..';
+	$Translation["can not delete group remove members"] = 'امکان حذف این گروه وجود ندارد. لطفاً ابتدا اعضا را حذف کنید.';
+	$Translation["can not delete group transfer records"] = 'امکان حذف این گروه وجود ندارد. لطفاً ابتدا رکوردهای داده‌ای آن را به یک گروه دیگر انتقال دهید.';
 	
 	//pageEditGroup.php
 	$Translation["group exists error"] = "Error: Group name already exists. You must choose a unique group name.";
