@@ -33,21 +33,17 @@
 <table class="table table-striped table-bordered table-hover">
 	<thead>
 		<tr>
-			<th><?php echo $Translation['username'] ; ?></th>
-			<th><?php echo $Translation["group"] ; ?></th>
-			<th><?php echo $Translation['sign up date'] ; ?></th>
-			<th><?php echo $adminConfig['custom1']; ?></th>
-			<th><?php echo $adminConfig['custom2']; ?></th>
-			<th><?php echo $adminConfig['custom3']; ?></th>
-			<th><?php echo $adminConfig['custom4']; ?></th>
-			<th><?php echo $Translation['Status'] ; ?></th>
+			<th>نام کاربری</th>
+			<th>گروه کاربری</th>
+			<th>زمان ثبت نام</th>
+			<th>وضعیت کاربر</th>
 			<th>&nbsp;</th>
 		</tr>
 	</thead>
 	<tbody>
 <?php
 
-	$res=sql("select lcase(m.memberID), g.name, DATE_FORMAT(m.signupDate, '" . makeSafe($adminConfig['MySQLDateFormat'], false) . "'), m.custom1, m.custom2, m.custom3, m.custom4, m.isBanned, m.isApproved from membership_users m left join membership_groups g on m.groupID=g.groupID $where order by m.signupDate limit $start, " . intval($adminConfig['membersPerPage']), $eo);
+	$res=sql("select lcase(m.memberID), g.name, DATE_FORMAT(m.signupDate, '" . makeSafe($adminConfig['MySQLDateFormat'], false) . "'),  m.isBanned, m.isApproved from membership_users m left join membership_groups g on m.groupID=g.groupID $where order by m.signupDate limit $start, " . intval($adminConfig['membersPerPage']), $eo);
 	while($row = db_fetch_row($res)){
 		$tr_class = '';
 		if($adminConfig['adminUsername'] == $row[0]) $tr_class = 'warning text-bold';
@@ -61,12 +57,9 @@
 			<?php } ?>
 			<td class="text-left"><?php echo thisOr($row[1]); ?></td>
 			<td class="text-left"><?php echo thisOr($row[2]); ?></td>
-			<td class="text-left"><?php echo thisOr($row[3]); ?></td>
-			<td class="text-left"><?php echo thisOr($row[4]); ?></td>
-			<td class="text-left"><?php echo thisOr($row[5]); ?></td>
-			<td class="text-left"><?php echo thisOr($row[6]); ?></td>
+
 			<td class="text-left">
-				<?php echo (($row[7] && $row[8]) ? $Translation['Banned'] : ($row[8] ? $Translation['active'] : $Translation['waiting approval'] )); ?>
+				<?php echo (($row[3] && $row[4]) ? $Translation['Banned'] : ($row[4] ? $Translation['active'] : $Translation['waiting approval'] )); ?>
 			</td>
 			<td class="text-center">
 				<?php if($adminConfig['anonymousMember'] == $row[0]){ ?>
@@ -81,10 +74,10 @@
 				<?php }else{ ?>
 					<a href="pageDeleteMember.php?memberID=<?php echo $row[0]; ?>" onClick="return confirm('<?php echo str_replace ( '<USERNAME>' , $row[0] , $Translation['sure delete user'] ); ?>');"><i class="glyphicon glyphicon-trash text-danger" title="<?php echo $Translation['delete member'] ; ?>"></i></a>
 					<?php
-						if(!$row[8]){ // if member is not approved, display approve link
+						if(!$row[4]){ // if member is not approved, display approve link
 							?><a href="pageChangeMemberStatus.php?memberID=<?php echo $row[0]; ?>&approve=1"><i class="glyphicon glyphicon-ok text-success" title="<?php echo $Translation["unban this member"] ; ?>" title="<?php echo $Translation["approve this member"] ; ?>"></i></a><?php
 						}else{
-							if($row[7]){ // if member is banned, display unban link
+							if($row[3]){ // if member is banned, display unban link
 								?><a href="pageChangeMemberStatus.php?memberID=<?php echo $row[0]; ?>&unban=1"><i class="glyphicon glyphicon-ok text-success" title="<?php echo $Translation["unban this member"] ; ?>"></i></a><?php
 							}else{ // if member is not banned, display ban link
 								?><a href="pageChangeMemberStatus.php?memberID=<?php echo $row[0]; ?>&ban=1"><i class="glyphicon glyphicon-ban-circle text-danger" title="<?php echo $Translation["ban this member"] ; ?>"></i></a><?php

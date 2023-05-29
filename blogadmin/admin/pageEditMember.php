@@ -198,25 +198,9 @@ if($memberID != '' && $groupID != sqlValue("select groupID from membership_group
 <div class="page-header">
 	<h1>
 		<?php echo ($memberID ? str_replace('<MEMBERID>', '<span class="text-primary">' . $memberID . '</span>', $Translation["edit member"]) : $Translation["add new member"] . $addend); ?>
-		<div class="pull-right">
-			<div class="btn-group">
-				<a href="pageViewMembers.php" class="btn btn-default btn-lg"><i class="glyphicon glyphicon-arrow-left"></i> <span class="hidden-xs hidden-sm"><?php echo $Translation['back to members']; ?></span></a>
-				<?php if($memberID){ ?>
-					<a href="pageViewRecords.php?memberID=<?php echo urlencode($memberID); ?>" class="btn btn-default btn-lg"><i class="glyphicon glyphicon-th"></i> <span class="hidden-xs hidden-sm"><?php echo $Translation['View member records']; ?></span></a>
-					<a href="pageMail.php?memberID=<?php echo urlencode($memberID); ?>" class="btn btn-default btn-lg"><i class="glyphicon glyphicon-envelope"></i> <span class="hidden-xs hidden-sm"><?php echo $Translation['send message to member']; ?></span></a>
-				<?php } ?>
-			</div>
-		</div>
-		<div class="clearfix"></div>
 	</h1>
 </div>
 
-
-<div style="height: 3em;"></div>
-
-<?php if($superadmin){ ?>
-	<div class="alert alert-warning"><?php echo $Translation["admin member"]; ?></div>
-<?php } ?>
 
 <form method="post" action="pageEditMember.php" class="form-horizontal">
 	<?php echo csrf_token(); ?>

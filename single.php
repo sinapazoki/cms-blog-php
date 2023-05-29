@@ -4,6 +4,11 @@
 include("database/conn.php");//database config file
 $id=$_REQUEST['id']; $query="SELECT * from blogs where id='".$id."'"; $result=mysqli_query($GLOBALS["___mysqli_ston"],$query) or die ( ((is_object($GLOBALS["___mysqli_ston"]))? mysqli_error($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_error()) ?$___mysqli_res : true))); 
 $row = mysqli_fetch_assoc($result);
+
+//query to get user details
+$query2="SELECT * from membership_users where memberID='".$row['author']."'"; $result2=mysqli_query($GLOBALS["___mysqli_ston"],$query2) or die ( ((is_object($GLOBALS["___mysqli_ston"]))? mysqli_error($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_error()) ?$___mysqli_res : true)));
+$user = mysqli_fetch_assoc($result2);
+
 ?>
 <!DOCTYPE html>
 <html lang="zxx">
@@ -33,6 +38,26 @@ $row = mysqli_fetch_assoc($result);
 	<?php getjavascripts("links"); ?>
 </head>
 
+<style>
+	.blockquote-custom {
+  position: relative;
+  font-size: 1.1rem;
+}
+
+.blockquote-custom-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: -25px;
+  left: 50px;
+}
+
+</style>
+
 <body>
 	<!--Header-->
 	<?php include("header.php");?> 
@@ -55,14 +80,14 @@ $row = mysqli_fetch_assoc($result);
 			<div class="row">
 				<!--left-->
 				<div class="col-lg-8 left-blog-info-w3layouts-agileits text-left">
-					<div class="blog-grid-top">
-						<div class="b-grid-top">
+					<div  dir="rtl" class="blog-grid-top text-right">
+						<div  class="b-grid-top ">
 							<div class="blog_info_left_grid">
 								<a href="#">
 									<img src="blogadmin/images/<?php echo $row['photo']; ?>" class="img-fluid" alt="image not available" style="width:900px;height:300px">
 								</a>
 							</div>
-							<div class="blog-info-middle">
+							<div  class="blog-info-middle ">
 								<ul>
 									<li>
 										<a href="#">
@@ -92,15 +117,25 @@ $row = mysqli_fetch_assoc($result);
 											</div>
 										</div>
 
-										<h3>
+										<h3 class="text-right">
 											<a href="single.html"><?php echo $row['title']; ?></a>
 										</h3>
-										<!--sharing script-->
-										<?php getsharingscript("links"); ?>
-										<?php echo $row['content']; ?>
+										<div   class="text-justify">
+											<?php echo $row['content']; ?>
+										</div>
+
 									</div>
-									<!--comments script will go here-->
-									<!-- <?php getcommentsscript("links"); ?> -->
+									<div class="">
+										<blockquote class="blockquote blockquote-custom bg-white py-5 shadow rounded">
+											<div class="blockquote-custom-icon bg-info shadow-sm"><i class="fa fa-quote-left text-white"></i></div>
+											<p class="mb-0 mt-2 font-italic text-right">
+											<?php echo $user['comments']; ?>
+											</p>
+											<div class="blockquote-footer pt-4 mt-4 border-top"><?php echo $user['memberID']; ?>
+												<cite title="Source Title"><?php echo $user['email']; ?></cite>
+										</div>
+										</blockquote>
+									</div>
 								</div>
 
 								<!--//left-->
