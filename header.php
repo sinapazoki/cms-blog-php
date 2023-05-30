@@ -15,7 +15,7 @@
 					<a class="navbar-brand" href="index.php">
 						<i class="fab fa-linode"></i> <?php getwebname("titles"); ?></a>
 				</div>
-				<div class="col-md-4 top-forms text-left mt-lg-3 mt-md-1 mt-0">
+				<div class="col-md-4 top-forms d-none d-md-block text-left mt-lg-3 mt-md-1 mt-0">
 					<span class="mx-lg-2 mx-md-2  mx-1 button-style">
 						<a href=" dashboard/index.php">
 							<i class="fas fa-lock"></i> <strong>ورود</strong></a>
@@ -29,7 +29,17 @@
 		</div>
 
 			<div class="header_top" id="home">
-				<nav class="navbar navbar-expand-lg navbar-light bg-light">
+				<nav class="navbar-expand-lg navbar-light bg-light text-right">
+					<div class="col-md-4 d-md-none mobile-nav top-forms text-left mt-lg-3 mt-md-1 mt-0">
+						<span class="mx-lg-2 mx-md-2  mx-1 button-style">
+							<a href=" dashboard/index.php">
+								<i class="fas fa-lock"></i> <strong>ورود</strong></a>
+						</span>
+						<span class="button-style">
+							<a href=" dashboard/membership_signup.php">
+								<i class="far fa-user"></i> <strong>ثبت نام</strong></a>
+						</span>
+					</div>
 					<button class="navbar-toggler navbar-toggler-right mx-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
 						aria-expanded="false" aria-label="Toggle navigation">
 						<span class="navbar-toggler-icon"></span>

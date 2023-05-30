@@ -53,7 +53,6 @@
             if ($usernow=="admin") {
             # code...show more links for admin only
             echo'<li><a href="titles_view.php"><i class="fa fa-desktop"></i>تنظیمات سایت</a></li>
-            <li><a href="editors_choice_view.php"><i class="fa fa-trophy"></i>پیشنهاد نویسنده</a></li>
             <li><a href="admin/pageViewMembers.php"><i class="fa fa-users"></i> مدیریت کاربران</a></li>';
           }
           ?> 

@@ -1401,6 +1401,17 @@ a.facebook:hover {
 	color: #fff;
 }
 
+.mobile-nav
+{
+	position: absolute;
+    left: 0;
+    padding: 2px 11px;
+    width: 80%;
+    z-index: 0;
+    display: flex;
+    justify-content: flex-end;
+}
+
 #toTop {
     display: none;
     text-decoration: none;

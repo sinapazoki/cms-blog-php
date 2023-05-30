@@ -2,14 +2,14 @@
 	<footer>
 		<div class="container">
 			<div class="row">
-				<div class="col-lg-4 footer-grid-agileits-w3ls text-right">
+				<div class="col-lg-4 footer-grid-agileits-w3ls text-right my-4">
 					<h3>درباره ما</h3>
 					<p><?php getshortdescription("titles"); ?></p>
 					<div class="read">
 						<a href="about.php" class="btn btn-sm rounded btn-primary read-m">مشاهده بیشتر</a>
 					</div>
 				</div>
-				<div class="col-lg-4 footer-grid-agileits-w3ls text-right">
+				<div class="col-lg-4 d-none d-md-block footer-grid-agileits-w3ls text-right">
 
 					<div class="tech-btm">
 						<h3>مقالات پربازدید</h3>
