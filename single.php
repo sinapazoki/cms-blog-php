@@ -125,8 +125,9 @@ $user = mysqli_fetch_assoc($result2);
 											<?php echo $row['content']; ?>
 										</div>
 
-									</div>
-									<div class="">
+
+										<!-- about blogger section -->
+										<div class="my-5">
 										<blockquote class="blockquote blockquote-custom bg-white py-5 shadow rounded">
 											<div class="blockquote-custom-icon bg-info shadow-sm"><i class="fa fa-quote-left text-white"></i></div>
 											<p class="mb-0 mt-2 font-italic text-right">
@@ -137,61 +138,115 @@ $user = mysqli_fetch_assoc($result2);
 										</div>
 										</blockquote>
 									</div>
-    <h2 style="margin: 0px;">ارسال نظر</h2>
-    <hr style="width: 200px;">
-    <div class="form">
-        <form method="post">
-            <input type="text" name="name" placeholder="نامـ"><br>
-            <input type="email" name="email" placeholder="ایمیلـ"><br>
-            <textarea name="text" placeholder="نظر"></textarea><br>
-            <input type="submit" name="submit" value="ارسال"><br>
-        </form>
-        <?php
-            if(isset($_POST['submit'])){
-                $name  = $_POST['name'];
-                $email = $_POST['email'];
-                $text  = $_POST['text'];
-                    if(empty($name)){
-                        echo "نام خود را وارد کنید";
-                    }elseif(empty($email)){
-                        echo "ایمیل خود را وارد کنید";
-                    }elseif(empty($text)){
-                        echo "نظر خود را وارد کنید";
-                    }elseif(!preg_match("/([\w\-]+\@[\w\-]+\.[\w\-]+)/",$email)){
-                        echo "ایمیل صحیح نیست";
-                    }else{
-                        $insert = "INSERT INTO opinions (name , email , opinion)
-                        VALUES (N'$name' , N'$email' , N'$text')";
+									<!-- end of about blogger section -->
 
-                            $insert_s = mysqli_query($con,$insert);
-                                if($insert_s){
-                                    echo "نظر شما با موفقیت ثبت شد";
-                                }else{
-                                    echo "به مشکل برخوردیم...";
-                                }
-                    }
-            }
-        ?>
-    </div>
-    <h2>نظرات</h2><hr>
-    <div class="opinions">
-        <?php
-            $select="SELECT * FROM `opinions`";
-                $run=mysqli_query($con,"SET NAME utf8");
-                $run=mysqli_query($con,"SET CHARACTER SET utf8");
-                $run=mysqli_query($con,$select);
-                    while($row=mysqli_fetch_array($run)){
-                        $S_name    = $row['name'];
-                        $S_opinion = $row['opinion'];
-        ?>
-            <div class="opinion">
-                <h3><?php echo $S_name; ?> : </h3><hr>
-                <textarea><?php echo $S_opinion; ?></textarea>
-            </div>
-        <?php
-                    }
-        ?>
-    </div>
+
+
+									<!-- comment section for blogs -->
+									<h4 class="text-right mb-4">ارسال نظر</h4>
+									
+									<form class="form-block my-5" method="post">
+										<div class="row">
+											<div class="col-xs-12 col-sm-6">
+												<div class="form-group fl_icon">
+													<div class="icon"><i class="far fa-user"></i></div>
+													<input class="form-input" type="text" name="name" placeholder="نام و نام خانوادگی">
+												</div>
+											</div>
+											<div class="col-xs-12 col-sm-6 fl_icon">
+												<div class="form-group fl_icon">
+													<div class="icon"><i class="far fa-envelope"></i></div>
+													<input class="form-input" type="email" name="email" placeholder="ایمیل">
+												</div>
+											</div>
+											<div class="col-xs-12 2 col-sm-12 text-left">									
+												<div class="form-group">
+													<textarea class="form-input"  name="text" required="" placeholder="کامنت خود را بنویسید"></textarea>
+												</div>
+												<input class="btn btn-primary pull-right" type="submit" name="submit" value="ارسال نظر"><br>
+
+											</div>
+										</div>
+									 </form>
+										<?php
+											if(isset($_POST['submit'])){
+												$name  = $_POST['name'];
+												$email = $_POST['email'];
+												$text  = $_POST['text'];
+												$blog_id = $row['id'] ;
+													if(empty($name)){
+														echo "نام خود را وارد کنید";
+													}elseif(empty($email)){
+														echo "ایمیل خود را وارد کنید";
+													}elseif(empty($text)){
+														echo "نظر خود را وارد کنید";
+													}elseif(!preg_match("/([\w\-]+\@[\w\-]+\.[\w\-]+)/",$email)){
+														echo "ایمیل صحیح نیست";
+													}else{
+														$insert = "INSERT INTO comments (name , email , comment , status , blog_id)
+														VALUES (N'$name' , N'$email' , N'$text' , '0' , $blog_id)";
+
+															$insert_s = mysqli_query($con,$insert);
+																if($insert_s){
+																	echo "<div class='succesful_comment fs-3'>نظر شما با موفقیت ثبت و پس از تایید منتشر خواهد شد</div>";
+																	$_POST = array();
+																	?>
+																	<script>
+																	if ( window.history.replaceState ) {
+																	  window.history.replaceState( null, null, window.location.href );
+																	}
+																	</script>
+																	<?php
+																	// exit();
+																}else{
+																	echo "<div class='error_comment'>ثبت نظر شما با خطا مواجه شد !</div>";
+																}
+													}
+											}
+										?>
+
+
+									<div class="">
+										<div class="be-comment-block">
+												<?php
+											$select="SELECT * FROM `comments` WHERE blog_id='".$row['id']."'  AND status = '1'" ;
+												$run=mysqli_query($con,"SET NAME utf8");
+												$run=mysqli_query($con,"SET CHARACTER SET utf8");
+												$run=mysqli_query($con,$select);
+													while($row=mysqli_fetch_array($run)){
+														$S_name    = $row['name'];
+														$S_comment= $row['comment'];
+														$S_email = $row['email'];
+														$S_created_at = $row['created_at'];
+										?>
+
+											<div class="be-comment">
+												<div class="be-comment-content w-100">
+														<span class="be-comment-name">
+															<a href="blog-detail-2.html"><?php echo $S_name; ?></a>
+															<span><?php echo $S_email; ?></span>
+															</span>
+														<span class="be-comment-time text-left">
+															<i class="fa fa-clock-o"></i>
+															<?php echo $S_created_at; ?>
+														</span>
+
+													<p class="be-comment-text">
+													<?php echo $S_comment; ?>
+													</p>
+												</div>
+											</div>
+
+
+										<?php
+													}
+										?>
+										</div>
+									</div>
+
+									<!-- end of comment section -->
+
+									</div>
 								</div>
 
 
