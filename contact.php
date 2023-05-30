@@ -1,12 +1,12 @@
 <?php require("libs/fetch_data.php");?>
 <!DOCTYPE html>
-<html lang="zxx">
+<html dir="rtl" lang="AF">
 
 <head>
 	<title><?php getwebname("titles"); echo"|"; gettagline("titles");?> | Contact</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta charset="utf-8">
-	<link id="browser_favicon" rel="shortcut icon" href="blogadmin/images/<?php geticon("titles"); ?>">
+	<link id="browser_favicon" rel="shortcut icon" href=" dashboard/images/<?php geticon("titles"); ?>">
 	<meta charset="utf-8" name="description" content="<?php getshortdescription("titles");?>">
 	<meta name="keywords" content="<?php getkeywords("titles");?>" />
 	<script>
@@ -55,12 +55,12 @@
 
 						<div class="col-lg-4 address-grid">
 							<div class="row address-info">
-								<div class="col-md-4 address-left text-center">
+								<div class="col-md-4 address-left text-left">
 									<i class="far fa-map"></i>
 								</div>
-								<div class="col-md-8 address-right text-left">
+								<div class="col-md-8 address-right text-right">
 									<h6>آدرس</h6>
-									<p> <?php getcontacts("titles","1");?>
+									<p class="text-right"> <?php getcontacts("titles","1");?>
 
 									</p>
 								</div>
@@ -69,12 +69,12 @@
 						</div>
 						<div class="col-lg-4 address-grid">
 							<div class="row address-info">
-								<div class="col-md-4 address-left text-center">
+								<div class="col-md-4 address-left text-left">
 									<i class="far fa-envelope"></i>
 								</div>
-								<div class="col-md-8 address-right text-left">
+								<div class="col-md-8 address-right text-right">
 									<h6>ایمیل</h6>
-									<p>
+									<p class="text-right">
 										<a href="mailto:<?php getcontacts("titles","2");?>"><?php getcontacts("titles","2");?></a></p>
 									</div>
 
@@ -82,10 +82,10 @@
 							</div>
 							<div class="col-lg-4 address-grid">
 								<div class="row address-info">
-									<div class="col-md-4 address-left text-center">
+									<div class="col-md-4 address-left text-left">
 										<i class="fas fa-mobile-alt"></i>
 									</div>
-									<div class="col-md-8 address-right text-left">
+									<div class="col-md-8 address-right text-right">
 										<h6>تلفن</h6>
 										<p><?php getcontacts("titles","3");?></p>
 

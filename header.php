@@ -11,17 +11,17 @@
 </style>
 		<div class="top-bar_sub_w3layouts container-fluid">
 			<div class="row d-flex justify-content-between">
-				<div class="col-md-4 logo text-left">
+				<div class="col-md-4 logo text-right">
 					<a class="navbar-brand" href="index.php">
 						<i class="fab fa-linode"></i> <?php getwebname("titles"); ?></a>
 				</div>
-				<div class="col-md-4 top-forms text-right mt-lg-3 mt-md-1 mt-0">
-					<span class="mx-lg-4 mx-md-2  mx-1">
-						<a href="blogadmin/index.php">
+				<div class="col-md-4 top-forms text-left mt-lg-3 mt-md-1 mt-0">
+					<span class="mx-lg-2 mx-md-2  mx-1 button-style">
+						<a href=" dashboard/index.php">
 							<i class="fas fa-lock"></i> <strong>ورود</strong></a>
 					</span>
-					<span>
-						<a href="blogadmin/membership_signup.php">
+					<span class="button-style">
+						<a href=" dashboard/membership_signup.php">
 							<i class="far fa-user"></i> <strong>ثبت نام</strong></a>
 					</span>
 				</div>
@@ -36,9 +36,9 @@
 				   </button>
 
 
-					<div class="collapse navbar-collapse d-flex flex-row-reverse" id="navbarSupportedContent">
-						<ul class="navbar-nav ml-auto  d-flex flex-row-reverse">
-							<li class="nav-item active">
+					<div class="collapse navbar-collapse" id="navbarSupportedContent">
+						<ul class="navbar-nav ml-auto  ">
+							<li class="nav-item">
 								<a class="nav-link" href="index.php">خانه
 									<span class="sr-only">(current)</span>
 								</a>
@@ -61,8 +61,10 @@
 							</li>
 
 						</ul>
+
+
 							<form action="search.php" method="post" class="rounded form-inline my-2 my-lg-0 header-search" name="form">
-								<input class="rounded text-right form-control" type="search" placeholder=" ... جستجو مقالات" required="yes" type="text" name="search[keyword]">
+								<input class="rounded text-right form-control" type="search" placeholder="جستجو مقالات..." required="yes" type="text" name="search[keyword]">
 								<button class="btn rounded btn1 my-2 my-sm-0" type="submit" name="submit"><i class="fas fa-search"></i></button>
 							</form>
 		

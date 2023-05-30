@@ -13,20 +13,13 @@
 
 					<div class="tech-btm">
 						<h3>مقالات پربازدید</h3>
+						<?php getolderposts("blogs");?>
 					</div>
 				</div>
 				<!-- subscribe -->
 				<div class="col-lg-4 subscribe-main footer-grid-agileits-w3ls text-right">
-					<h3 class="fs-3">برای عضویت در خبرنامه ایمیل خود را وارد نمایید</h3>
-					<div class="subscribe-main text-left">
-							<div class="subscribe-form">
-									<form action="#" method="post" class="subscribe_form">
-										<input class="form-control" type="email" placeholder="Enter your email..." required="">
-										<button type="submit" class="btn btn-sm btn-primary submit">ارسال</button>
-									</form>
-									<div class="clearfix"> </div>
-						   </div>
-					</div>
+				<h3>تماس با ما</h3>
+					<p><?php getcontact("titles"); ?></p>
 					<!-- //subscribe -->
 				</div>
 			</div>

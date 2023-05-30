@@ -12,12 +12,12 @@ $user = mysqli_fetch_assoc($result2);
 
 ?>
 <!DOCTYPE html>
-<html lang="zxx">
+<html dir="rtl" lang=" AF">
 <head>
 	<title><?php echo $row['title']; ?>|<?php getwebname("titles");?></title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta charset="utf-8">
-	<link id="browser_favicon" rel="shortcut icon" href="blogadmin/images/<?php geticon("titles"); ?>">
+	<link id="browser_favicon" rel="shortcut icon" href=" dashboard/images/<?php geticon("titles"); ?>">
 	<meta charset="utf-8" name="description" content="<?php getshortdescription("titles");?>">
 	<meta name="keywords" content="<?php getkeywords("titles");?>" />
 	<script>
@@ -85,7 +85,7 @@ $user = mysqli_fetch_assoc($result2);
 						<div  class="b-grid-top ">
 							<div class="blog_info_left_grid">
 								<a href="#">
-									<img src="blogadmin/images/<?php echo $row['photo']; ?>" class="img-fluid" alt="image not available" style="width:900px;height:300px">
+									<img src=" dashboard/images/<?php echo $row['photo']; ?>" class="img-fluid" alt="image not available" style="width:900px;height:300px">
 								</a>
 							</div>
 							<div  class="blog-info-middle ">
@@ -108,9 +108,9 @@ $user = mysqli_fetch_assoc($result2);
 											</li>
 											<li>
 												<a href="#" class="d-flex align-items-center">
-												<i class="far fa-user"></i>
-												<span>دقیقه</span>
-												<?php echo $row['time']; ?></a>
+												<i class="far fa-clock"></i>
+												<?php echo $row['time']; ?>
+												<span>دقیقه</span></a>
 												</li>
 
 

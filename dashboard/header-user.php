@@ -62,34 +62,9 @@
 
             <li class="dropdown user-dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i>  <?php echo getLoggedMemberID(); ?><b class="caret"></b></a>
-            <ul class="dropdown-menu">
+            <ul class="dropdown-menu p-4" style="padding:10px ; border-radius:10px;">
               <li><a href="<?php echo PREPEND_PATH; ?>membership_profile.php"><i class="fa fa-user"></i> <strong>جزئیات پروفایل</strong> </a></li>
-              <!--login/logout area starts-->
-              <li>
-               <?php if(getLoggedAdmin()){ ?>
-               <a href="<?php echo PREPEND_PATH; ?>admin/pageHome.php" class="btn btn-danger navbar-btn btn-sm hidden-xs"><i class="fa fa-cog"></i> <strong><?php echo $Translation['admin area']; ?></strong></a>
-               <a href="<?php echo PREPEND_PATH; ?>admin/pageHome.php" class="btn btn-danger navbar-btn btn-sm visible-xs btn-sm"><i class="fa fa-cog"></i> <strong><?php echo $Translation['admin area']; ?></strong></a>
-               <?php } ?>
-               <?php if(!$_GET['signIn'] && !$_GET['loginFailed']){ ?>
-               <?php if(getLoggedMemberID() == $adminConfig['anonymousMember']){ ?>
-               <p class="navbar-text navbar-right">&nbsp;</p>
-               <a href="<?php echo PREPEND_PATH; ?>index.php?signIn=1" class="btn btn-success navbar-btn btn-sm navbar-right"><strong><?php echo $Translation['sign in']; ?></strong></a>
-               <p class="navbar-right" style="
-                  color: white;
-                  margin: 10px;
-              ">
-                <?php echo $Translation['not signed in']; ?>
-              </p>
-              <?php }else{ ?>
-              <ul class="nav navbar-nav navbar-right hidden-xs" style="min-width: 330px;">
-              </ul>
-              <ul class="nav navbar-nav visible-xs">
-              </ul>
-              <?php } ?>
-              <?php } ?>
-            </li>
-            <!--login/logout area ends-->
-            <li class="divider"></li>
+
             <li><a class="btn navbar-btn btn-primary" href="<?php echo PREPEND_PATH; ?>index.php?signOut=1"><i class="fa fa-power-off"></i> <strong style="color:white"><?php echo $Translation['sign out']; ?></strong> </a></li>
           </ul>
         </li>

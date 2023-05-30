@@ -9,7 +9,7 @@
 			</ol>
 			<div class="carousel-inner" role="listbox">
 				<div class="carousel-item active">
-					<div class="carousel-caption">
+					<div class="carousel-caption text-right">
 						<h3>
 							<?php getbannertext("titles","1") ?>
 						</h3>

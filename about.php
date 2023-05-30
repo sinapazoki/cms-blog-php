@@ -1,11 +1,11 @@
 <?php require("libs/fetch_data.php");?>
 <!DOCTYPE html>
-<html lang="zxx">
+<html dir="rtl" lang="AF">
 <head>
 	<title><?php getwebname("titles"); echo"|"; gettagline("titles");?>| درباره ما</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta charset="utf-8">
-	<link id="browser_favicon" rel="shortcut icon" href="blogadmin/images/<?php geticon("titles"); ?>">
+	<link id="browser_favicon" rel="shortcut icon" href=" dashboard/images/<?php geticon("titles"); ?>">
 	<meta charset="utf-8" name="description" content="<?php getshortdescription("titles");?>">
 	<meta name="keywords" content="<?php getkeywords("titles");?>" />
 	<script>
@@ -43,7 +43,7 @@
 	<section class="main-content-w3layouts-agileits">
 		<div class="container">
 			<h3 class="tittle">درباره ما</h3>
-			<div class="row inner-sec">
+			<div class="row inner-sec text-right">
 				<!--left-->
 				<div class="col-lg-8 left-blog-info-w3layouts-agileits text-left">
 					<div class="blog-grid-top">
@@ -53,10 +53,10 @@
 								<img src="images/b5.jpg" class="img-fluid" alt="">
 							</a>
 						</div>
-						<h3>
+						<h3 class="text-right">
 							<?php getwebname("titles"); echo"|"; gettagline("titles");?>
 						</h3>
-						<p><?php getdetaileddescription("titles");?></p>
+						<p class="text-justify"><?php getdetaileddescription("titles");?></p>
 					</div>
 				</div>
 				<!--//left-->

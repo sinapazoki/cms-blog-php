@@ -22,7 +22,7 @@
 		'senderName' => "Membership management",
 		'senderEmail' => "ronniengoda@gmail.com",
 		'approvalSubject' => "Your membership is now approved",
-		'approvalMessage' => "Dear member,\r\n\r\nYour membership is now approved by the admin. You can log in to your account here:\r\nhttp://localhost/blogadmin\r\n\r\nRegards,\r\nAdmin",
+		'approvalMessage' => "Dear member,\r\n\r\nYour membership is now approved by the admin. You can log in to your account here:\r\nhttp://localhost/ dashboard\r\n\r\nRegards,\r\nAdmin",
 		'hide_twitter_feed' => "",
 		'maintenance_mode_message' => "<b>Our website is currently down for maintenance</b><br>\r\nWe expect to be back in a couple hours. Thanks for your patience.",
 		'mail_function' => "mail",

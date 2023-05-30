@@ -123,6 +123,32 @@ function getshortdescription($table){
 		foreach ($result as $titles => $sdc) {
       	# code...
 			echo ''.$sdc['short_description'].'';
+			
+		}
+	}
+
+	mysqli_close($con);
+}
+
+function getcontact($table){
+	require("database/db_connect.php");
+	$sql="SELECT * FROM $table ";
+	if ($result=mysqli_query($con,$sql))
+	{
+      	//count number of rows in query result
+		$rowcount=mysqli_num_rows($result);
+      	//if no rows returned show no news alert
+		if ($rowcount==0) {
+      		# code...
+			echo 'No Description!!';
+		}
+      	//if there are rows available display all the results
+		foreach ($result as $titles => $sdc) {
+      	# code...
+		echo '<div class="contact-info">'.$sdc['address'].'</div>
+		      <div class="contact-info">'.$sdc['phone'].'</div>
+		';
+
 		}
 	}
 
@@ -210,7 +236,7 @@ function countcategories(){
 			}
 					# code...show data
 			echo '<li class="list-group-item d-flex justify-content-between align-items-center">
-			'.$categorydata['name'].'
+			<a href="category.php?id='.$categorydata['id'].'">'.$categorydata['name'].'</a>
 			<span class="badge badge-success badge-pill">'.$rowcountcategory.'</span>
 			</li>';
 		}
@@ -386,7 +412,7 @@ function getbottomsliderposts($table){
 				#code...display the results
 			echo '<li>
 			<div class="blog-item">
-			<img src="blogadmin/images/'.$slideritem['photo'].'" alt="fantastic cms" class="img-fluid" style="width:450px;height:350px"/>
+			<img src=" dashboard/images/'.$slideritem['photo'].'" alt="cms" class="img-fluid" style="width:450px;height:350px"/>
 			<button type="button" class="btn btn-primary play">
 			<a href="single.php?id='.$slideritem['id'].'" style="text-decoration:none;color:white"><i class="fas fa-eye"></i></a>
 			</button>
@@ -424,40 +450,33 @@ function getblogridposts($table){
 		  $y =  substr($griditem['date'], 0, 4);
 		  $m = substr($griditem['date'],5, 2);
 		  $d  =substr($griditem['date'],8, 2);
-
+		 $content =  substr($griditem['content'],0,230) ;
 		$jalali =  gregorian_to_jalali($y,$m, $d,'/');
 
 			echo '<div class="col-md-6 blog-grid-top">
-			<div class="b-grid-top">
-			<div class="blog_info_left_grid">
-			<a href="single.php?id='.$griditem['id'].'">
-			<img src="blogadmin/images/'.$griditem['photo'].'" class="img-fluid" alt="fantastic cms" style="width:350px;height:250px">
-			</a>
+			<article class="card">
+			<header class="card__thumb">
+				<a  href="single.php?id='.$griditem['id'].'"><img class="w-100" src=" dashboard/images/'.$griditem['photo'].'"></a>
+				
+			</header>
+			<div class="card__date">
+				<span class="card__date__day">'.$jalali.'</span>
 			</div>
-			<h3 class="text-right">
-			<a href="single.php?id='.$griditem['id'].'">'.$griditem['title'].'</a>
-			</h3>
+			<div class="card__body">
+				<div class="card__title text-right"><a  href="single.php?id='.$griditem['id'].'">'.$griditem['title'].'</a></div>
+				<div class="card__subtitle text-right">'.$content.'...</div>
+				</div>
+			<div class="card__footer d-flex gap-3 p-3 align-items-center justify-content-start align-content-center">
+				<span class="d-flex gap-3"><i class="far fa-clock"></i>'.$griditem['time'].'دقیقه</span>
+				<span class="d-flex gap-3"><i class="far fa-user"></i>'.$griditem['author'].'</span>
+				
+				<a href="single.php?id='.$griditem['id'].'" class="btn btn-link mr-auto fs-2 btn-blog">مشاهده مقاله</a>
+
 			</div>
-			<ul class="blog-icons text-right">
-			<li class="mx-2">
-			<a href="#">
-			<i class="far fa-clock"></i>'.$jalali.'</a>
-			</li>
-			<li class="mx-2">
-			<a href="#">
-			<i class="far fa-user"></i> '.$griditem['author'].'</a>
-			</li>
-			<li>
-			<a href="#" class="d-flex align-items-center">
-			<i class="fas fa-tags"></i>
-			<span>دقیقه</span>
-
-			'.$griditem['time'].'
-			</a>
-			</li>
-
-			</ul>
+		</article>
 			</div>';
+
+			
 		}
 	}
 
@@ -466,7 +485,7 @@ function getblogridposts($table){
 }
 function getolderposts($table){
 	require("database/db_connect.php");
-	$sql="SELECT * FROM $table WHERE posted='publish' ORDER BY id ASC LIMIT 8";
+	$sql="SELECT * FROM $table WHERE posted='publish' ORDER BY id ASC LIMIT 2";
 	if ($result=mysqli_query($con,$sql))
 	{
       	//count number of rows in query result
@@ -479,10 +498,10 @@ function getolderposts($table){
       	//if there are rows available display all the results
 		foreach ($result as $olderposts => $op) {
       	# code...
-			echo '<div class="blog-grids row mb-3">
+			echo '<div class="blog-grids row mb-3 d-flex align-items-center">
 			<div class="col-md-5 blog-grid-left">
 			<a href="single.php?id='.$op['id'].'">
-			<img src="blogadmin/images/'.$op['photo'].'" class="img-fluid" alt="fantastic cms">
+			<img src=" dashboard/images/'.$op['photo'].'" class="img-fluid" alt="cms">
 			</a>
 			</div>
 			<div class="col-md-7 blog-grid-right">
@@ -490,9 +509,11 @@ function getolderposts($table){
 			<h5>
 			<a href="single.php?id='.$op['id'].'">'.$op['title'].'</a>
 			</h5>
-			<div class="sub-meta">
+			<div class="sub-meta d-flex justify-content-around">
 			<span>
 			<i class="far fa-clock"></i> '.$op['date'].'</span>
+			<span>
+			<i class="far fa-user"></i> '.$op['author'].'</span>
 			</div>
 			</div>
 
@@ -518,8 +539,8 @@ function getfour($table){
 		foreach ($result as $thefour => $fourdata) {
       	# code...
 			echo '<li>
-			<a href="blogadmin/images/'.$fourdata['photo'].'">
-			<img src="blogadmin/images/'.$fourdata['photo'].'" alt="fantastic cms" data-desoslide-caption="<h3>Latest Post '.$fourdata['id'].'</h3>">
+			<a href=" dashboard/images/'.$fourdata['photo'].'">
+			<img src=" dashboard/images/'.$fourdata['photo'].'" alt="cms" data-desoslide-caption="<h3>Latest Post '.$fourdata['id'].'</h3>">
 			<div class="mid-text-info">
 			<h4 style="height:40px;overflow:hidden;text-overflow:ellipsis">'.$fourdata['title'].'</h4>
 			<p>'.$fourdata['author'].'</p>
@@ -554,7 +575,7 @@ function getonelatest($table){
 			<div class="b-grid-top">
 			<div class="blog_info_left_grid">
 			<a href="single.php?id='.$onedata['id'].'">
-			<img src="blogadmin/images/'.$onedata['photo'].'" class="img-fluid" alt="fantastic cms" style="width:900px;height:500px">
+			<img src=" dashboard/images/'.$onedata['photo'].'" class="img-fluid" alt="cms" style="width:900px;height:500px">
 			</a>
 			</div>
 			<div class="blog-info-middle">
@@ -610,7 +631,7 @@ function geteditorschoice($table){
 					echo '<div class="blog-grids row mb-3">
 								<div class="col-md-5 blog-grid-left">
 									<a href="single.php?id='.$postdata['id'].'">
-										<img src="blogadmin/images/'.$postdata['photo'].'" class="img-fluid" alt="fantastic cms">
+										<img src=" dashboard/images/'.$postdata['photo'].'" class="img-fluid" alt="cms">
 									</a>
 								</div>
 								<div class="col-md-7 blog-grid-right">
@@ -645,35 +666,42 @@ function getcategoryblogs($table,$id){
       		# code...
 			echo 'پستی برای نمایش نیست';
 		}
+
+
       	//if there are rows available display all the results
 		foreach ($result as $categories => $cdata) {
-      	# code...
-			echo '<div class="col-md-6 card">
-							<a href="single.php?id='.$cdata['id'].'">
-								<img src="blogadmin/images/'.$cdata['photo'].'" class="card-img-top img-fluid" alt="fantastic cms" style="width:480px;height:300px">
-							</a>
-							<div class="card-body">
-								<ul class="blog-icons my-4">
-									<li>
-										<a href="#">
-											<i class="far fa-calendar-alt"></i> '.$cdata['date'].'</a>
-									</li>
-									<li class="mx-2">
-										<a href="#">
-											<i class="far fa-user"></i> '.$cdata['author'].'</a>
-									</li>
-									<li>
-										<a href="#">
-											<i class="fas fa-tags"></i> '.$cdata['tags'].'</a>
-									</li>
 
-								</ul>
-								<h5 class="card-title ">
-									<a href="single.php?id='.$cdata['id'].'">'.$cdata['title'].'</a>
-								</h5>
-								<a href="single.php?id='.$cdata['id'].'" class="btn btn-primary read-m"> More</a>
-							</div>
-						</div>';
+			$y =  substr($cdata['date'], 0, 4);
+			$m = substr($cdata['date'],5, 2);
+			$d  =substr($cdata['date'],8, 2);
+		   $content =  substr($cdata['content'],0,230) ;
+		  $jalali =  gregorian_to_jalali($y,$m, $d,'/');
+
+      	# code...
+		  echo '<div class="col-md-6 blog-grid-top">
+		  <article class="card">
+		  <header class="card__thumb">
+			  <a  href="single.php?id='.$cdata['id'].'"><img class="w-100" src=" dashboard/images/'.$cdata['photo'].'"></a>
+			  
+		  </header>
+		  <div class="card__date">
+			  <span class="card__date__day">'.$jalali.'</span>
+		  </div>
+		  <div class="card__body">
+			  <div class="card__title text-right"><a  href="single.php?id='.$cdata['id'].'">'.$cdata['title'].'</a></div>
+			  <div class="card__subtitle text-right">'.$content.'...</div>
+			  </div>
+		  <div class="card__footer d-flex gap-3 p-3 align-items-center justify-content-start align-content-center">
+			  <span class="d-flex gap-3"><i class="far fa-clock"></i>'.$cdata['time'].'دقیقه</span>
+			  <span class="d-flex gap-3"><i class="far fa-user"></i>'.$cdata['author'].'</span>
+			  
+			  <a href="single.php?id='.$cdata['id'].'" class="btn btn-link mr-auto fs-2 btn-blog">مشاهده مقاله</a>
+
+		  </div>
+	  </article>
+		  </div>';
+
+
 		}
 	}
 
@@ -704,7 +732,7 @@ function getpopularposts($table){
 					echo '<div class="blog-grids row mb-3">
 							<div class="col-md-5 blog-grid-left">
 								<a href="single.php?id='.$specificblog['id'].'">
-									<img src="blogadmin/images/'.$specificblog['photo'].'" class="img-fluid" alt="fantastic cms">
+									<img src=" dashboard/images/'.$specificblog['photo'].'" class="img-fluid" alt="cms">
 								</a>
 							</div>
 							<div class="col-md-7 blog-grid-right">

@@ -1,11 +1,11 @@
 <?php require("libs/fetch_data.php");?>
 <!DOCTYPE html>
-<html rtl lang="zxx">
+<html dir="rtl" lang="AF">
 <head>
 	<title><?php getwebname("titles"); echo"|"; gettagline("titles");?></title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta charset="utf-8">
-	<link id="browser_favicon" rel="shortcut icon" href="blogadmin/images/<?php geticon("titles"); ?>">
+	<link id="browser_favicon" rel="shortcut icon" href=" dashboard/images/<?php geticon("titles"); ?>">
 	<meta charset="utf-8" name="description" content="<?php getshortdescription("titles");?>">
 	<meta name="keywords" content="<?php getkeywords("titles");?>" />
 	<script>
@@ -55,30 +55,7 @@
 					</section>
 					<!--//main-->
 
-					<!---->
-					<section class="main-content-w3layouts-agileits">
-						<div class="container">
-							<div class="row">
-								<!--left-->
-								<div class="col-lg-8 left-blog-info-w3layouts-agileits text-left">
-									<?php getonelatest("blogs");?>
-								</div>
-								<!--//left-->
-								<!--right-->
-								<aside class="col-lg-4 agileits-w3ls-right-blog-con text-left">
-									<div class="tech-btm">
-										<h4>پیشنهاد نویسنده</h4>
-										
-										<?php geteditorschoice("editors_choice"); ?>
-										
-									</div>
-									
-								</aside>
-								<!--//right-->
-							</div>
-						</div>
-					</section>
-					<!--//main-->
+
 					<?php include("footer.php");?>
 					<!---->
 					<!-- js -->
