@@ -157,7 +157,7 @@ img[src="blank.gif"] { max-height: 10px !important; }
 
 .theme-compact .navbar {
 	margin-bottom: 13px;
-	min-height: 40px;
+	min-height: 50px;
 }
 
 .theme-compact .navbar-fixed-bottom {

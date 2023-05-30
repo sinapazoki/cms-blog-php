@@ -24,7 +24,7 @@
 	$Translation['sure move all members'] = 'آیا از انتقال همه اعضا و داده‌ها از گروه \'<OLDGROUP>\' به گروه \'<NEWGROUP>\' مطمئن هستید؟';
 	$Translation['sure move data of all members'] = 'آیا از انتقال داده‌های تمامی اعضای گروه \'<OLDGROUP>\' به عضو \'<MEMBER>\' از گروه \'<NEWGROUP>\' مطمئن هستید؟';
 	$Translation['toggle navigation'] = "تغییر ناوبری";
-	$Translation['admin area'] = "پیشخوان مدیر";
+	$Translation['admin area'] = "پیشخوان ";
 	$Translation['groups'] = "گروه‌ها";
 	$Translation['view groups'] = "مشاهده گروه‌ها";
 	$Translation['add group'] = "افزودن گروه";
@@ -113,8 +113,8 @@
 	$Translation["change password"] = "رمز عبور را فقط در صورت تمایل به تغییر رمز عبور این کاربر وارد کنید. در غیر اینصورت، این فیلد را خالی بگذارید.";
 	$Translation["confirm password"] = "تأیید رمز عبور";
 	$Translation["email"] = "ایمیل";
-	$Translation["approved"] = "تأییدشده؟";
-	$Translation["banned"] = "محروم شده؟";
+	$Translation["approved"] = "تأییدشده";
+	$Translation["banned"] = "مسدود شده";
 	$Translation["comments"] = "نظرات";
 	$Translation["back to members"] = "بازگشت به اعضا";
 	$Translation["member added"] = "کاربر <USERNAME> با موفقیت افزوده شد";

@@ -101,7 +101,8 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="../index.php"><span class="text-info"><i class="glyphicon glyphicon-cog"></i> <?php echo $Translation['admin area']; ?></span></a>
+				<a class="navbar-brand p-4" href="<?php echo PREPEND_PATH; ?>index.php"><i class="glyphicon glyphicon-home"></i>پیشخوان</a>
+
 			</div>
 
 	
